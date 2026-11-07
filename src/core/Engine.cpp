@@ -1,13 +1,17 @@
 #include "ai/core/Engine.hpp"
+#include "ai/core/Job.hpp"
 #include <sstream>
 
 namespace ai {
 
-    std::string Engine::plan(std::string_view story) const {
+    std::string Engine::plan(std::string_view idea) const {
+        Job job{"preview-only",idea};
+        
         std::ostringstream prompt;
 
-        prompt << "\n=== TOP THE GOALS ENGINE ===\n\n";
-        prompt << "Story: " << story << "\n\n";
+        prompt << "Job ID: " << job.id << "\n";
+        prompt << "Story: " << job.idea << "\n";
+        prompt << "Status: " << toString(job.status) << "\n\n";
 
         prompt << "Production pipeline:\n";
         prompt << "[1] Research & script\n";
